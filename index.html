@@ -560,146 +560,62 @@
                 </div>
             </div>
 
-            <!-- Step 3: Get Database Password -->
-            <div class="step active" id="step3">
+            <!-- Step 3: Pull Data -->
+            <div class="step collapsed" id="step3">
                 <div class="step-header" onclick="toggleStep(this)">
                     <div class="step-number">3</div>
-                    <div class="step-title">Get Your Database Password</div>
-                    <div class="step-status status-active">In Progress</div>
+                    <div class="step-title">Pull Your Schema & Data</div>
+                    <div class="step-status status-pending">Not Started</div>
                 </div>
                 <div class="step-content">
                     <div class="content-section">
-                        <h3>Find Your Database Connection Details</h3>
-                        <p style="color: #cbd5e1; margin-bottom: 12px;">Follow these steps to get your password:</p>
+                        <h3>Export Your Data</h3>
+                        <p style="color: #cbd5e1; margin-bottom: 12px;">Run this command in PowerShell to pull your complete schema and data:</p>
+                        <div class="code-block" onclick="copyToClipboard(event)">supabase db pull</div>
+                    </div>
+
+                    <div class="content-section">
+                        <h3>Answer the Prompts</h3>
                         <ul class="checklist">
-                            <li>Go to <a href="https://supabase.com/dashboard" class="external-link" target="_blank">Supabase Dashboard</a></li>
-                            <li>Select your project from the list</li>
-                            <li>Click <strong>Settings</strong> (gear icon) in the left sidebar</li>
-                            <li>Click <strong>Database</strong></li>
-                            <li>Look for the <strong>Connection string</strong> section</li>
-                            <li>You'll see something like: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">postgresql://postgres:YOUR_PASSWORD@db.xyz.supabase.co:5432/postgres</code></li>
-                            <li>Copy the password (the text between <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">postgres:</code> and <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">@db</code>)</li>
-                            <li>Also note your <strong>Project Reference</strong> (from Settings → General) - looks like <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">abcdefghijklmno</code></li>
+                            <li>CLI asks: <em>"Include data?"</em> → Type <strong>Y</strong> and press Enter</li>
+                            <li>Sit back—it's downloading everything from your Supabase.com project</li>
+                            <li>This creates migration files in your project folder</li>
                         </ul>
                     </div>
 
                     <div class="warning-box">
-                        🔒 <strong>Keep this password secure!</strong> Don't share it with anyone. It's sensitive data.
+                        ⏱️ <strong>Takes time?</strong> Large databases can take several minutes. That's normal. Don't interrupt it or close PowerShell.
+                    </div>
+
+                    <div class="content-section">
+                        <h3>What You Get</h3>
+                        <p style="color: #cbd5e1; margin-bottom: 12px;">After completion, a new folder appears in your Downloads folder. The files will be located at:</p>
+                        <div class="code-block" style="margin-top: 10px; cursor: default;" onclick="event.stopPropagation()">C:\Users\%USERNAME%\Downloads\
+└── supabase\
+    ├── migrations\
+    │   ├── 20250101120000_initial_schema.sql
+    │   └── 20250101120001_seed_data.sql
+    └── config.toml</div>
+                        <div class="info-box" style="margin-top: 12px;">
+                            <strong>📂 Full Windows Path:</strong><br>
+                            Migration files: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">C:\Users\%USERNAME%\Downloads\supabase\migrations\</code><br>
+                            <br>
+                            You can open this folder in Windows Explorer by running:<br>
+                            <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px; font-family: JetBrains Mono, monospace;">explorer C:\Users\%USERNAME%\Downloads\supabase\migrations</code>
+                        </div>
                     </div>
 
                     <div class="button-group">
+                        <button class="btn-secondary" onclick="goToStep(1)">Back</button>
                         <button class="btn-primary" onclick="nextStep(2)">Continue</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 4: Install PostgreSQL Client -->
+            <!-- Step 4: Send to Nathan -->
             <div class="step collapsed" id="step4">
                 <div class="step-header" onclick="toggleStep(this)">
                     <div class="step-number">4</div>
-                    <div class="step-title">Install PostgreSQL Client Tools</div>
-                    <div class="step-status status-pending">Not Started</div>
-                </div>
-                <div class="step-content">
-                    <div class="content-section">
-                        <h3>🪟 Windows Setup</h3>
-                        <p style="color: #cbd5e1; margin-bottom: 16px;">You need the PostgreSQL client tools to export your data:</p>
-                    </div>
-
-                    <div class="content-section">
-                        <h3>Option A: Using Chocolatey (If Installed)</h3>
-                        <p style="color: #cbd5e1; margin-bottom: 8px;">Open PowerShell as Administrator and run:</p>
-                        <div class="code-block" onclick="copyToClipboard(event)">choco install postgresql</div>
-                    </div>
-
-                    <div class="content-section">
-                        <h3>Option B: Direct Download (Recommended)</h3>
-                        <ol style="color: #cbd5e1; margin-left: 20px; line-height: 1.8;">
-                            <li>Go to <a href="https://www.postgresql.org/download/windows/" class="external-link" target="_blank">PostgreSQL Downloads</a></li>
-                            <li>Click the latest version (e.g., PostgreSQL 16)</li>
-                            <li>Download the Windows installer</li>
-                            <li>Run the installer</li>
-                            <li>When asked what to install, make sure <strong>"Command Line Tools"</strong> is checked</li>
-                            <li>Complete the installation (default settings are fine)</li>
-                        </ol>
-                    </div>
-
-                    <div class="content-section">
-                        <h3>Verify Installation</h3>
-                        <p style="color: #cbd5e1; margin-bottom: 8px;">Open PowerShell and run:</p>
-                        <div class="code-block" onclick="copyToClipboard(event)">pg_dump --version</div>
-                        <div class="success-box" style="margin-top: 12px;">✓ You should see a version number like <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">pg_dump 16.x</code></div>
-                    </div>
-
-                    <div class="info-box">
-                        <strong>💡 Need help?</strong> If <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">pg_dump</code> is not recognized, you may need to restart PowerShell or add PostgreSQL to your PATH.
-                    </div>
-
-                    <div class="button-group">
-                        <button class="btn-secondary" onclick="goToStep(2)">Back</button>
-                        <button class="btn-primary" onclick="nextStep(3)">Continue</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 5: Export Data -->
-            <div class="step collapsed" id="step5">
-                <div class="step-header" onclick="toggleStep(this)">
-                    <div class="step-number">5</div>
-                    <div class="step-title">Export Your Database</div>
-                    <div class="step-status status-pending">Not Started</div>
-                </div>
-                <div class="step-content">
-                    <div class="content-section">
-                        <h3>Run the Export Command</h3>
-                        <p style="color: #cbd5e1; margin-bottom: 12px;">Open PowerShell and run this command (replace the values from Step 1):</p>
-                        <div class="code-block" onclick="copyToClipboard(event)">$env:PGPASSWORD='YOUR_PASSWORD'; pg_dump -h db.YOUR_PROJECT_REF.supabase.co -U postgres -d postgres --schema=public --no-owner --no-privileges > export.sql</div>
-                    </div>
-
-                    <div class="content-section">
-                        <h3>Step by Step:</h3>
-                        <ul class="checklist">
-                            <li><code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">YOUR_PASSWORD</code> = Password from Step 1</li>
-                            <li><code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">YOUR_PROJECT_REF</code> = Project Reference from Step 1 (e.g., <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">abcdefghijklmno</code>)</li>
-                            <li>Paste the entire command into PowerShell</li>
-                            <li>Press Enter</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-section">
-                        <h3>Example:</h3>
-                        <div class="code-block" style="cursor: default;" onclick="event.stopPropagation()">$env:PGPASSWORD='my_secure_password123'; pg_dump -h db.abcdefghijklmno.supabase.co -U postgres -d postgres --schema=public --no-owner --no-privileges > export.sql</div>
-                    </div>
-
-                    <div class="warning-box">
-                        ⏱️ <strong>Takes time?</strong> Depending on your database size, this can take several minutes. Just wait—it's working in the background.
-                    </div>
-
-                    <div class="content-section">
-                        <h3>What Happens Next</h3>
-                        <ul class="checklist">
-                            <li>PowerShell completes the command (no special message)</li>
-                            <li>A new file <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">export.sql</code> appears in your current folder</li>
-                            <li>This file contains all your schema and data</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-box">
-                        <strong>💡 Check the file:</strong> Run <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">ls export.sql</code> to verify the file exists
-                    </div>
-
-                    <div class="button-group">
-                        <button class="btn-secondary" onclick="goToStep(3)">Back</button>
-                        <button class="btn-primary" onclick="nextStep(4)">Continue</button>
-                    </div>
-                </div>
-            </div>
-  
-
-            <!-- Step 6: Send to Nathan -->
-            <div class="step collapsed" id="step6">
-                <div class="step-header" onclick="toggleStep(this)">
-                    <div class="step-number">6</div>
                     <div class="step-title">Send Files to Nathan</div>
                     <div class="step-status status-pending">Not Started</div>
                 </div>
@@ -728,7 +644,7 @@
                     </div>
                    
                     <div class="button-group">
-                        <button class="btn-secondary" onclick="goToStep(4)">Back</button>
+                        <button class="btn-secondary" onclick="goToStep(2)">Back</button>
                     </div>
                 </div>
             </div>
