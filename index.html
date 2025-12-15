@@ -571,7 +571,7 @@
                     <div class="content-section">
                         <h3>Export Your Data</h3>
                         <p style="color: #cbd5e1; margin-bottom: 12px;">Run this command in PowerShell to pull your complete schema and data:</p>
-                        <div class="code-block" onclick="copyToClipboard(event)">supabase db pull</div>
+                        <div class="code-block" onclick="copyToClipboard(event)">supabase db dump > migratedSupabase.sql</div>
                     </div>
 
                     <div class="content-section">
@@ -590,18 +590,11 @@
                     <div class="content-section">
                         <h3>What You Get</h3>
                         <p style="color: #cbd5e1; margin-bottom: 12px;">After completion, a new folder appears in your Downloads folder. The files will be located at:</p>
-                        <div class="code-block" style="margin-top: 10px; cursor: default;" onclick="event.stopPropagation()">C:\Users\%USERNAME%\Downloads\
-└── supabase\
-    ├── migrations\
-    │   ├── 20250101120000_initial_schema.sql
-    │   └── 20250101120001_seed_data.sql
-    └── config.toml</div>
+                        <div class="code-block" style="margin-top: 10px; cursor: default;" onclick="event.stopPropagation()">C:\Users\%USERNAME%\Downloads\</div>
                         <div class="info-box" style="margin-top: 12px;">
                             <strong>📂 Full Windows Path:</strong><br>
-                            Migration files: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">C:\Users\%USERNAME%\Downloads\supabase\migrations\</code><br>
+                            Migration files: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">C:\Users\%USERNAME%\Downloads\migratedSupabase.sql</code><br>
                             <br>
-                            You can open this folder in Windows Explorer by running:<br>
-                            <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px; font-family: JetBrains Mono, monospace;">explorer C:\Users\%USERNAME%\Downloads\supabase\migrations</code>
                         </div>
                     </div>
 
@@ -634,7 +627,7 @@
                             </li>
                             <li>
                                 Attach your generated <strong>.sql</strong> migration files from:
-                                <div class="code-block" style="margin-top: 8px; margin-bottom: 8px; cursor: default;" onclick="event.stopPropagation()">C:\Users\%USERNAME%\Downloads\supabase\migrations\</div>
+                                <div class="code-block" style="margin-top: 8px; margin-bottom: 8px; cursor: default;" onclick="event.stopPropagation()">C:\Users\%USERNAME%\Downloads\migratedSupabase.sql</div>
                                 <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 8px;">💡 <strong>Tip:</strong> You can select all <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">.sql</code> files in this folder (Ctrl+A) and attach them all at once.</p>
                             </li>
                             <li>
